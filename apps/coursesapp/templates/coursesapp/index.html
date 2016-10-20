@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Courses Dashboard</title>
+  </head>
+  <body>
+    <!-- Add a new course -->
+    <form action="/addcourse" method="post">
+      {% csrf_token %}
+      <h2>Add a new course</h2>
+      <label>Name: </label>
+        <input type="text" name="name">
+      <label>Description: </label>
+        <textarea name="description" rows="15" cols="80"></textarea>
+      <input type="submit" name="addcoursebtn" value="Add">
+    </form>
+    <!-- display available courses -->
+    <h2>Courses </h2>
+    <table>
+      <tr>
+        <th>Course Name</th>
+        <th>Description</th>
+        <th>Date Added</th>
+        <th>Actions</th>
+      </tr>
+      {% for course in courses%}
+      <tr>
+        <td>{{course.name}}</td>
+        <td>{{course.description}}</td>
+        <td>{{course.created_at}}</td>
+        <td><a href="/confirmdel/{{course.id}}">Remove</a></td>
+      </tr>
+      {% endfor %}
+
+    </table>
+
+  </body>
+</html>
